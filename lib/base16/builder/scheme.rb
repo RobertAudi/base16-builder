@@ -32,6 +32,15 @@ module Base16
       def slug(separator: "-")
         name.gsub(/[^a-z0-9\-_]+/i, separator).downcase
       end
+
+      def to_s
+        "#{name} by #{author}"
+      end
+
+      def inspect
+        hex_bases = Hash[bases.map { |k, v| [k, "##{v}"] }]
+        "#<#{self.class.name} name:#{name.inspect} author:#{author.inspect} bases:#{hex_bases.inspect}>"
+      end
     end
   end
 end

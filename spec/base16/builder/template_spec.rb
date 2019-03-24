@@ -76,4 +76,22 @@ RSpec.describe Base16::Builder::Template do
         .to eq(File.read(File.join(support_dir, "out/alacritty/base16-default-dark.yml")))
     end
   end
+
+  describe "#to_s" do
+    it "returns the name of the template" do
+      template_file = File.join(Base16::Builder::TEMPLATES_DIR, "alacritty.yml.erb")
+      template = described_class.new(file: template_file)
+
+      expect(template.to_s).to eq("alacritty")
+    end
+  end
+
+  describe "#inspect" do
+    it "returns a human-readable representation of the template object" do
+      template_file = File.join(Base16::Builder::TEMPLATES_DIR, "alacritty.yml.erb")
+      template = described_class.new(file: template_file)
+
+      expect(template.inspect).to eq(%Q[#<#{described_class.name} name:"alacritty">])
+    end
+  end
 end

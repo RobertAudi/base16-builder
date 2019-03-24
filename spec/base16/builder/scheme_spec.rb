@@ -70,4 +70,26 @@ RSpec.describe Base16::Builder::Scheme do
       expect(scheme.slug(separator: "_")).to eq("default_dark")
     end
   end
+
+  describe "#to_s" do
+    it "returns the name and author of the scheme" do
+      scheme_file = File.join(Base16::Builder::SCHEMES_DIR, "default-dark.yaml")
+      scheme = described_class.new(file: scheme_file)
+
+      expect(scheme.to_s).to eq("Default Dark by Chris Kempson (http://chriskempson.com)")
+    end
+
+    describe "#inspect" do
+      it "returns a human-readable representation of the template object" do
+        scheme_file = File.join(Base16::Builder::SCHEMES_DIR, "default-dark.yaml")
+        scheme = described_class.new(file: scheme_file)
+
+        name = "Default Dark"
+        author = "Chris Kempson (http://chriskempson.com)"
+        bases = %q[{"base00"=>"#181818", "base01"=>"#282828", "base02"=>"#383838", "base03"=>"#585858", "base04"=>"#b8b8b8", "base05"=>"#d8d8d8", "base06"=>"#e8e8e8", "base07"=>"#f8f8f8", "base08"=>"#ab4642", "base09"=>"#dc9656", "base0A"=>"#f7ca88", "base0B"=>"#a1b56c", "base0C"=>"#86c1b9", "base0D"=>"#7cafc2", "base0E"=>"#ba8baf", "base0F"=>"#a16946"}]
+
+        expect(scheme.inspect).to eq(%Q[#<#{described_class.name} name:"#{name}" author:"#{author}" bases:#{bases}>])
+      end
+    end
+  end
 end

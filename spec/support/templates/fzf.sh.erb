@@ -1,0 +1,29 @@
+# Base16 <%= scheme.name %>
+# Author: <%= scheme.author %>
+
+function base16_<%= scheme.slug(separator: "_") %>_fzf_opts() {
+  local color00='#<%= scheme.bases["00"] %>'
+  local color01='#<%= scheme.bases["01"] %>'
+  local color02='#<%= scheme.bases["02"] %>'
+  local color03='#<%= scheme.bases["03"] %>'
+  local color04='#<%= scheme.bases["04"] %>'
+  local color05='#<%= scheme.bases["05"] %>'
+  local color06='#<%= scheme.bases["06"] %>'
+  local color07='#<%= scheme.bases["07"] %>'
+  local color08='#<%= scheme.bases["08"] %>'
+  local color09='#<%= scheme.bases["09"] %>'
+  local color0A='#<%= scheme.bases["0A"] %>'
+  local color0B='#<%= scheme.bases["0B"] %>'
+  local color0C='#<%= scheme.bases["0C"] %>'
+  local color0D='#<%= scheme.bases["0D"] %>'
+  local color0E='#<%= scheme.bases["0E"] %>'
+  local color0F='#<%= scheme.bases["0F"] %>'
+
+  export BASE16_<%= scheme.slug(separator: "_").upcase %>_FZF_OPTS="
+    --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
+    --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
+    --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
+  "
+}
+
+base16_<%= scheme.slug(separator: "_") %>_fzf_opts

@@ -34,6 +34,14 @@ module Base16
         end
       end
 
+      def to_s
+        name.to_s
+      end
+
+      def inspect
+        "#<#{self.class.name} name:#{name.inspect}>"
+      end
+
       private
 
       attr_reader :file_path
