@@ -24,7 +24,7 @@ module Base16
 
       def render(scheme:)
         rendered_filename = "base16-#{scheme.slug}#{file_extension}"
-        rendered_dir = File.join(File.join(Dir.pwd, "out"), name)
+        rendered_dir = File.join(output_dir, name)
         rendered_file_path = File.join(rendered_dir, rendered_filename)
         rendered_template = template.result_with_hash({ scheme: scheme })
 
@@ -39,6 +39,10 @@ module Base16
 
       def template
         @template ||= ERB.new(File.read(file_path))
+      end
+
+      def output_dir
+        ENV.fetch("BASE16_BUILDER_OUTPUT_DIR", File.join(Dir.pwd, "out"))
       end
     end
   end
