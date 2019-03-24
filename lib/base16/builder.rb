@@ -1,6 +1,7 @@
 require "base16/builder/version"
 require "base16/builder/scheme"
 require "base16/builder/template"
+require "base16/builder/collections"
 
 module Base16
   module Builder
