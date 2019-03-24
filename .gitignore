@@ -8,6 +8,7 @@
 /tmp/
 /out/
 /spec/out/
+!/spec/support/out/
 
 # rspec failure tracking
 .rspec_status

@@ -1,0 +1,84 @@
+# Base16 <%= scheme.name %> 256 - alacritty color config
+# <%= scheme.author %>
+colors:
+  # Default colors
+  primary:
+    background: '0x<%= scheme.bases["base00"] %>'
+    foreground: '0x<%= scheme.bases["base05"] %>'
+
+    # # Bright and dim foreground colors
+    # #
+    # # The dimmed foreground color is calculated automatically if it is not present.
+    # # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # # is `false`, the normal foreground color will be used.
+    # dim_foreground: '0x<%= scheme.bases["base05"] %>'
+    # bright_foreground: '0x<%= scheme.bases["base05"] %>'
+
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
+  cursor:
+    text: '0x<%= scheme.bases["base00"] %>'
+    cursor: '0x<%= scheme.bases["base05"] %>'
+
+  # # Selection colors
+  # #
+  # # Colors which should be used to draw the selection area. If selection
+  # # background is unset, selection color will be the inverse of the cell colors.
+  # # If only text is unset the cell text color will remain the same.
+  # selection:
+  #   text: '0x<%= scheme.bases["base00"] %>'
+  #   background: '0x<%= scheme.bases["base08"] %>'
+
+  # Normal colors
+  normal:
+    black:   '0x<%= scheme.bases["base00"] %>'
+    red:     '0x<%= scheme.bases["base08"] %>'
+    green:   '0x<%= scheme.bases["base0B"] %>'
+    yellow:  '0x<%= scheme.bases["base0A"] %>'
+    blue:    '0x<%= scheme.bases["base0D"] %>'
+    magenta: '0x<%= scheme.bases["base0E"] %>'
+    cyan:    '0x<%= scheme.bases["base0C"] %>'
+    white:   '0x<%= scheme.bases["base05"] %>'
+
+  # Bright colors
+  bright:
+    black:   '0x<%= scheme.bases["base03"] %>'
+    red:     '0x<%= scheme.bases["base08"] %>'
+    green:   '0x<%= scheme.bases["base0B"] %>'
+    yellow:  '0x<%= scheme.bases["base0A"] %>'
+    blue:    '0x<%= scheme.bases["base0D"] %>'
+    magenta: '0x<%= scheme.bases["base0E"] %>'
+    cyan:    '0x<%= scheme.bases["base0C"] %>'
+    white:   '0x<%= scheme.bases["base07"] %>'
+
+  # # Dim colors
+  # #
+  # # If the dim colors are not set, they will be calculated automatically based
+  # # on the `normal` colors.
+  # dim:
+  #   black:   '0x<%= scheme.bases["base00"] %>'
+  #   red:     '0x<%= scheme.bases["base08"] %>'
+  #   green:   '0x<%= scheme.bases["base0B"] %>'
+  #   yellow:  '0x<%= scheme.bases["base0A"] %>'
+  #   blue:    '0x<%= scheme.bases["base0D"] %>'
+  #   magenta: '0x<%= scheme.bases["base0E"] %>'
+  #   cyan:    '0x<%= scheme.bases["base0C"] %>'
+  #   white:   '0x<%= scheme.bases["base05"] %>'
+
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #
+  # Example:
+  #   `- { index: 16, color: '0xff00ff' }`
+  #
+  indexed_colors:
+    - { index: 16, color: '0x<%= scheme.bases["base09"] %>' }
+    - { index: 17, color: '0x<%= scheme.bases["base0F"] %>' }
+    - { index: 18, color: '0x<%= scheme.bases["base01"] %>' }
+    - { index: 19, color: '0x<%= scheme.bases["base02"] %>' }
+    - { index: 20, color: '0x<%= scheme.bases["base04"] %>' }
+    - { index: 21, color: '0x<%= scheme.bases["base06"] %>' }
