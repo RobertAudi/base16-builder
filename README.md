@@ -1,7 +1,9 @@
 Base16::Builder
 ===============
 
-TODO: Describe your gem
+This is a base16 builder written in Ruby as defined by the [base16 builder guidelines version 0.9.0][1].
+
+[1]: https://github.com/chriskempson/base16/blob/master/builder.md
 
 Installation
 ------------
