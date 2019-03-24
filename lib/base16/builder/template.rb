@@ -6,6 +6,21 @@ module Base16
     class Template
       attr_reader :name
 
+      def self.all
+        template_files = Dir[File.join(Base16::Builder.templates_dir, "*.erb")]
+        Base16::Builder::TemplatesCollection.new(template_files)
+      end
+
+      def self.count
+        Dir[File.join(Base16::Builder.templates_dir, "*.erb")].count
+      end
+
+      def self.find_each(&block)
+        block_given? or return all
+
+        all.each(&block)
+      end
+
       def self.find(name)
         file_path = Dir[File.join(Base16::Builder.templates_dir, "#{name}{,.*}.erb")].find { |f| File.file?(f) }
 

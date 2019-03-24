@@ -7,6 +7,11 @@ module Base16
       attr_reader :author
       attr_reader :bases
 
+      def self.all
+        scheme_files = Dir[File.join(Base16::Builder.schemes_dir, "*.yaml")]
+        Base16::Builder::SchemesCollection.new(scheme_files)
+      end
+
       def self.find(name)
         file_path = File.join(Base16::Builder.schemes_dir, "#{name}.yaml")
 

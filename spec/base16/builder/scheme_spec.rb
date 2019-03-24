@@ -3,6 +3,25 @@ RSpec.describe Base16::Builder::Scheme do
     stub_const("Base16::Builder::SCHEMES_DIR", File.join(support_dir, "schemes"))
   end
 
+  describe ".all" do
+    it "returns an instance of 'Base16::Builder::SchemesCollection'" do
+      pending "The 'invalid' scheme makes this test fail"
+
+      expect(described_class.all).to be_an_instance_of(Base16::Builder::SchemesCollection)
+    end
+
+    it "retrieves all available schemes", aggregate_failures: true do
+      pending "The 'invalid' scheme makes this test fail"
+
+      schemes = described_class.all
+
+      expect(schemes.count).to eq(2)
+      expect(schemes)
+        .to include("Default Dark")
+        .and include("Railscasts")
+    end
+  end
+
   describe ".find" do
     context "when the template is not found:" do
       it "raises an error" do

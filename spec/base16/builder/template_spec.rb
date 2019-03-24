@@ -6,6 +6,47 @@ RSpec.describe Base16::Builder::Template do
     stub_const("Base16::Builder::TEMPLATES_DIR", File.join(support_dir, "templates"))
   end
 
+  describe ".all" do
+    it "returns an instance of 'Base16::Builder::TemplatesCollection'" do
+      expect(described_class.all).to be_an_instance_of(Base16::Builder::TemplatesCollection)
+    end
+
+    it "retrieves all available templates", aggregate_failures: true do
+      templates = described_class.all
+
+      expect(templates.count).to eq(2)
+      expect(templates)
+        .to include("alacritty")
+        .and include("fzf")
+    end
+  end
+
+  describe ".count" do
+    it "returns the number of available templates" do
+      expect(described_class.count).to eq(2)
+    end
+  end
+
+  describe ".find_each" do
+    context "without a block" do
+      it "returns a collection" do
+        expect(described_class.find_each)
+          .to be_an_instance_of(Base16::Builder::TemplatesCollection)
+      end
+    end
+
+    context "with a block" do
+      it "yields the block with every template" do
+        templates = %w[alacritty.yml.erb fzf.sh.erb].map do |t|
+          described_class.new(file: File.join(Base16::Builder::TEMPLATES_DIR, t))
+        end
+
+        expect { |b| described_class.find_each(&b) }
+          .to yield_successive_args(*templates)
+      end
+    end
+  end
+
   describe ".find" do
     context "when the template is not found:" do
       it "raises an error" do
