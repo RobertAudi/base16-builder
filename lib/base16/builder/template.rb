@@ -20,16 +20,25 @@ module Base16
         @file_path = file
         @file_extension = File.extname(File.basename(file, ".erb"))
         @name = File.basename(File.basename(file, ".erb"), ".*")
-        @template = ERB.new(File.read(file))
       end
 
       def render(scheme:)
-        rendered_filename = "base16-#{scheme.slug}#{@file_extension}"
-        rendered_dir = "out/#{@name}"
-        rendered_template = @template.result_with_hash({ scheme: scheme })
+        rendered_filename = "base16-#{scheme.slug}#{file_extension}"
+        rendered_dir = File.join(File.join(Dir.pwd, "out"), name)
+        rendered_file_path = File.join(rendered_dir, rendered_filename)
+        rendered_template = template.result_with_hash({ scheme: scheme })
 
         FileUtils.mkdir_p(rendered_dir)
-        File.write("#{rendered_dir}/#{rendered_filename}", rendered_template)
+        File.write(rendered_file_path, rendered_template)
+      end
+
+      private
+
+      attr_reader :file_path
+      attr_reader :file_extension
+
+      def template
+        @template ||= ERB.new(File.read(file_path))
       end
     end
   end

@@ -40,17 +40,14 @@ RSpec.describe Base16::Builder::Template do
     end
 
     let(:scheme) { Base16::Builder::Scheme.find("default-dark") }
+    let(:template) { described_class.find("alacritty") }
 
     it "creates the output directory" do
-      template = described_class.find("alacritty")
-
       expect { template.render(scheme: scheme) }
         .to change { File.directory?("out/alacritty") }.from(false).to(true)
     end
 
     it "creates the rendered template file", aggregate_failures: true do
-      template = described_class.find("alacritty")
-
       expect { template.render(scheme: scheme) }
         .to change { File.file?("out/alacritty/base16-default-dark.yml") }.from(false).to(true)
 
