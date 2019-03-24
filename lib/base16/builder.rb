@@ -8,5 +8,13 @@ module Base16
 
     SCHEMES_DIR = File.expand_path(File.join(__dir__, "..", "..", "share", "schemes"))
     TEMPLATES_DIR = File.expand_path(File.join(__dir__, "..", "..", "share", "templates"))
+
+    def self.schemes_dir
+      ENV.fetch("BASE16_BUILDER_SCHEMES_DIR", SCHEMES_DIR)
+    end
+
+    def self.templates_dir
+      ENV.fetch("BASE16_BUILDER_TEMPLATES_DIR", TEMPLATES_DIR)
+    end
   end
 end

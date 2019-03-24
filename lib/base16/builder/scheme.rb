@@ -8,7 +8,7 @@ module Base16
       attr_reader :bases
 
       def self.find(name)
-        file_path = File.join(SCHEMES_DIR, "#{name}.yaml")
+        file_path = File.join(Base16::Builder.schemes_dir, "#{name}.yaml")
 
         unless File.file?(file_path)
           fail Error.new("Scheme not found: #{name}")

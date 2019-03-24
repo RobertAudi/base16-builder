@@ -7,7 +7,7 @@ module Base16
       attr_reader :name
 
       def self.find(name)
-        file_path = Dir[File.join(TEMPLATES_DIR, "#{name}{,.*}.erb")].find { |f| File.file?(f) }
+        file_path = Dir[File.join(Base16::Builder.templates_dir, "#{name}{,.*}.erb")].find { |f| File.file?(f) }
 
         unless file_path
           fail Error.new("No templates mathing name: #{name}")
