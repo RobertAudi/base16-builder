@@ -42,6 +42,17 @@ module Base16
         "#<#{self.class.name} name:#{name.inspect}>"
       end
 
+      def ==(other)
+        case other
+        when self.class
+          name == other.name
+        when String
+          name == other
+        else
+          self == String(other)
+        end
+      end
+
       private
 
       attr_reader :file_path

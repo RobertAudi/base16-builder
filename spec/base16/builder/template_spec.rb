@@ -94,4 +94,30 @@ RSpec.describe Base16::Builder::Template do
       expect(template.inspect).to eq(%Q[#<#{described_class.name} name:"alacritty">])
     end
   end
+
+  describe "#==" do
+    let(:template) do
+      template_file = File.join(Base16::Builder::TEMPLATES_DIR, "alacritty.yml.erb")
+      described_class.new(file: template_file)
+    end
+
+    context "when compared to a #{described_class}" do
+      it "checks the 'name' attribute of each object" do
+        template_file = File.join(Base16::Builder::TEMPLATES_DIR, "alacritty.yml.erb")
+        expect(template).to eq(described_class.new(file: template_file))
+      end
+    end
+
+    context "when compared to a String" do
+      it "compares its 'name' attribute to the String" do
+        expect(template).to eq("alacritty")
+      end
+    end
+
+    context "when compared with an arbitrary object" do
+      it "compares itself to the String representation of the other object" do
+        expect(template).to eq(:alacritty)
+      end
+    end
+  end
 end

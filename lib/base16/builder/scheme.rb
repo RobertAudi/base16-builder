@@ -41,6 +41,17 @@ module Base16
         hex_bases = Hash[bases.map { |k, v| [k, "##{v}"] }]
         "#<#{self.class.name} name:#{name.inspect} author:#{author.inspect} bases:#{hex_bases.inspect}>"
       end
+
+      def ==(other)
+        case other
+        when self.class
+          name == other.name && author == other.author && bases == other.bases
+        when String
+          to_s == other || name == other
+        else
+          self == String(other)
+        end
+      end
     end
   end
 end

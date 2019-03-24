@@ -91,5 +91,36 @@ RSpec.describe Base16::Builder::Scheme do
         expect(scheme.inspect).to eq(%Q[#<#{described_class.name} name:"#{name}" author:"#{author}" bases:#{bases}>])
       end
     end
+
+    describe "#==" do
+      let(:scheme) do
+        scheme_file = File.join(Base16::Builder::SCHEMES_DIR, "railscasts.yaml")
+        described_class.new(file: scheme_file)
+      end
+
+      context "when compared to a #{described_class}" do
+        it "checks the 'name', 'author' and 'bases' attributes of each object" do
+          scheme_file = File.join(Base16::Builder::SCHEMES_DIR, "railscasts.yaml")
+
+          expect(scheme).to eq(described_class.new(file: scheme_file))
+        end
+      end
+
+      context "when compared to a String" do
+        it "compares its String representation to the other String" do
+          expect(scheme).to eq("Railscasts by Ryan Bates (http://railscasts.com)")
+        end
+
+        it "compares its 'name' attribute to the other String as a fallback" do
+          expect(scheme).to eq("Railscasts")
+        end
+      end
+
+      context "when compared with an arbitrary object" do
+        it "compares itself to the String representation of the other object" do
+          expect(scheme).to eq(:Railscasts)
+        end
+      end
+    end
   end
 end
