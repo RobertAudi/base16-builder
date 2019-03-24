@@ -22,14 +22,16 @@ module Base16
         @name = File.basename(File.basename(file, ".erb"), ".*")
       end
 
-      def render(scheme:)
-        rendered_filename = "base16-#{scheme.slug}#{file_extension}"
-        rendered_dir = File.join(output_dir, name)
-        rendered_file_path = File.join(rendered_dir, rendered_filename)
-        rendered_template = template.result_with_hash({ scheme: scheme })
+      def render(schemes:)
+        Array(schemes).each do |scheme|
+          rendered_filename = "base16-#{scheme.slug}#{file_extension}"
+          rendered_dir = File.join(output_dir, name)
+          rendered_file_path = File.join(rendered_dir, rendered_filename)
+          rendered_template = template.result_with_hash({ scheme: scheme })
 
-        FileUtils.mkdir_p(rendered_dir)
-        File.write(rendered_file_path, rendered_template)
+          FileUtils.mkdir_p(rendered_dir)
+          File.write(rendered_file_path, rendered_template)
+        end
       end
 
       private

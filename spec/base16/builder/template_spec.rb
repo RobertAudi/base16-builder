@@ -43,12 +43,12 @@ RSpec.describe Base16::Builder::Template do
     let(:template) { described_class.find("alacritty") }
 
     it "creates the output directory" do
-      expect { template.render(scheme: scheme) }
+      expect { template.render(schemes: scheme) }
         .to change { File.directory?("out/alacritty") }.from(false).to(true)
     end
 
     it "creates the rendered template file", aggregate_failures: true do
-      expect { template.render(scheme: scheme) }
+      expect { template.render(schemes: scheme) }
         .to change { File.file?("out/alacritty/base16-default-dark.yml") }.from(false).to(true)
 
       expect(File.read("out/alacritty/base16-default-dark.yml"))
@@ -68,7 +68,7 @@ RSpec.describe Base16::Builder::Template do
         .with("BASE16_BUILDER_OUTPUT_DIR", File.join(Dir.pwd, "out"))
         .and_return("/tmp/base16/builder/out")
 
-      expect { template.render(scheme: scheme) }
+      expect { template.render(schemes: scheme) }
         .to change { File.directory?("/tmp/base16/builder/out/alacritty") }.from(false).to(true)
         .and change { File.file?("/tmp/base16/builder/out/alacritty/base16-default-dark.yml") }.from(false).to(true)
 
